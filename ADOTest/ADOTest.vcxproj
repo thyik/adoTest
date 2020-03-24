@@ -137,12 +137,21 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ado2.h" />
+    <ClInclude Include="MaintenanceInputRS.h" />
+    <ClInclude Include="MaintenanceOutputRS.h" />
+    <ClInclude Include="MotorRS.h" />
+    <ClInclude Include="MtrProfileRS.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="structure.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ado2.cpp" />
     <ClCompile Include="ADOTest.cpp" />
+    <ClCompile Include="MaintenanceInputRS.cpp" />
+    <ClCompile Include="MaintenanceOutputRS.cpp" />
+    <ClCompile Include="MotorRS.cpp" />
+    <ClCompile Include="MtrProfileRS.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

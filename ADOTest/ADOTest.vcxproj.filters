@@ -27,6 +27,21 @@
     <ClInclude Include="ado2.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="MaintenanceInputRS.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="structure.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MotorRS.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MaintenanceOutputRS.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MtrProfileRS.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -36,6 +51,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ado2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MaintenanceInputRS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MotorRS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MaintenanceOutputRS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MtrProfileRS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

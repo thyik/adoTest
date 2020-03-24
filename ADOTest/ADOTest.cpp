@@ -4,6 +4,9 @@
 #include "stdafx.h"
 
 #include "ado2.h"
+#include "MaintenanceInputRS.h"
+#include "MaintenanceOutputRS.h"
+#include "MotorRS.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -68,6 +71,45 @@ int _tmain(int argc, _TCHAR* argv[])
         //BOOL test = AdoDb.Execute("select * from MotorSpeed order by [Package Name]");
 
         AdoDb.Close();
+    }
+    //
+    CMotorRS rsMotor;
+    CMaintenanceInputRS rsInput;
+    CMaintenanceOutputRS rsOutput;
+    stModule module[MAX_MODULE];
+
+    rsMotor.InitModule(module);
+    rsMotor.InitMotorModule(module);
+    rsMotor.GetNoOfModule();
+
+    rsInput.InitInputModule(module);
+    ////
+    rsOutput.InitOutputModule(module);
+    //
+
+    // release memory
+    for (int i = 0; i < MAX_MODULE; i++)
+    {
+        for (int j = 0; j < MAX_MOTOR_MODULE_ARRAY; j++)
+        {
+            if (module[i].Motor[j] != NULL)
+            {
+                delete  module[i].Motor[j];
+            }
+        }
+    }
+
+    for (int i = 0; i < MAX_MODULE; i++)
+    {
+        module[i].csName.Empty();
+        module[i].nNoOfInput  = 0;
+        module[i].nNoOfMotor  = 0;
+        module[i].nNoOfOutput = 0;
+
+        for (int j = 0; j < MAX_MOTOR_MODULE_ARRAY; j++)
+        {
+            module[i].Motor[j] = NULL;
+        }
     }
 
     return 0;
