@@ -624,7 +624,7 @@ int CMotorRS::InitModule(stModule *module)
         dbModule.Open(this->GetConnectionString("d:\\machine\\database\\mitmc.mdb"));
 
         CString csSQL;
-        csSQL.Format("SELECT * FROM [Module]");
+        csSQL.Format("SELECT * FROM [Module] ORDER BY ID");
         RecordSet.Open(csSQL);
 
         if (RecordSet.IsEOF())
