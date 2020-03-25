@@ -8,6 +8,8 @@
 #include "MaintenanceOutputRS.h"
 #include "MotorRS.h"
 
+#include "SharedMemory.h"
+
 int _tmain(int argc, _TCHAR* argv[])
 {
     CADODatabase AdoDb;
@@ -112,6 +114,31 @@ int _tmain(int argc, _TCHAR* argv[])
         }
     }
 
+    // shm
+    typedef struct _stShmData {
+        int data1;
+        double data2;
+    } stShmData;
+
+    TCHAR  szName[] = TEXT("Global/MotorIO");
+
+    off_t size = 1 * sizeof(stShmData);
+
+    if (size <= 0)
+    {
+        size = sizeof(stShmData);
+    }
+
+// round up to the OS page size.
+
+    stShmData *pData = NULL;
+    //TRACE("\n\n\n+++ MotionThreadFn sizeof(CMtrStatus) = %d  m_bEnabShm =%d size of sharedram %d m_iNoOfMtr=%d\n", sizeof(CMtrStatus), size, run->m_iNoOfMtr);
+
+    // the following object meant not to ve unmapped
+    CSharedMemory shm(szName, size, false);
+    pData = static_cast<stShmData *>(shm.getDirectMap());
+    ASSERT(pData != NULL);
+    TRACE("SHM MMF pData= (0x%X).\n", (void*)pData);
     return 0;
 }
 
