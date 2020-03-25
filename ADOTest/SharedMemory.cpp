@@ -112,7 +112,7 @@ DWORD CSharedMemory::CreateSharedMemEx(LPCTSTR pszName, DWORD dwBytes, bool bNam
 
     DWORD dwShmSize = CalculateShmSize(dwBytes);
 
-    m_hMapping = CreateFileMapping((HANDLE)0xFFFFFFFF, NULL, PAGE_READWRITE, 0, dwShmSize, (LPCTSTR)csName);
+    m_hMapping = CreateFileMapping(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0, dwShmSize, (LPCTSTR)csName);
 
     if (m_hMapping)
     {

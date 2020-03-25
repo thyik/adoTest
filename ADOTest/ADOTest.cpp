@@ -47,10 +47,10 @@ int _tmain(int argc, _TCHAR* argv[])
                 CString csValue;
                 double homeMaxSpd;
                 //rs.GetFieldValue("Package Name", csValue);
-                rs.GetFieldValue("Module Name", csValue);
-                rs.GetFieldValue("Motor Name", csValue);
-                rs.GetFieldValue("Position Name", csValue);
-                rs.GetFieldValue("SubFieldPosName", csValue);
+                //rs.GetFieldValue("Module Name", csValue);
+                //rs.GetFieldValue("Motor Name", csValue);
+                //rs.GetFieldValue("Position Name", csValue);
+                //rs.GetFieldValue("SubFieldPosName", csValue);
                 //rs.GetFieldValue("Home Max Speed", homeMaxSpd);
                 // eg. : add, update
                 //rs.AddNew();
