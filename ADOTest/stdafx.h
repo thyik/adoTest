@@ -5,11 +5,12 @@
 
 #pragma once
 
+#include <afxwin.h>
 #include "targetver.h"
 
 #include <stdio.h>
 #include <tchar.h>
-
+#include "import_directive.h"
 
 
 // TODO: reference additional headers your program requires here

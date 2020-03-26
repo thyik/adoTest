@@ -9,6 +9,7 @@
 #include "MotorRS.h"
 
 #include "SharedMemory.h"
+#include "FileLocation.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -139,6 +140,10 @@ int _tmain(int argc, _TCHAR* argv[])
     pData = static_cast<stShmData *>(shm.getDirectMap());
     ASSERT(pData != NULL);
     TRACE("SHM MMF pData= (0x%X).\n", (void*)pData);
+
+
+    std::string utilityTestPath = CFileLocation::GetCurrentModulePath();
+    CFileLocation::PathRemoveFileSpec(utilityTestPath);
     return 0;
 }
 
