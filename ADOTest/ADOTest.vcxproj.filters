@@ -51,6 +51,9 @@
     <ClInclude Include="FileLocation.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="ODBCRecordset.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -78,6 +81,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FileLocation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ODBCRecordset.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -11,6 +11,8 @@
 #include "SharedMemory.h"
 #include "FileLocation.h"
 
+#include "ODBCRecordset.h"
+
 int _tmain(int argc, _TCHAR* argv[])
 {
     CADODatabase AdoDb;
@@ -19,7 +21,7 @@ int _tmain(int argc, _TCHAR* argv[])
     //strConnection = _T("Provider=Microsoft.ACE.OLEDB.12.0;Persist Security Info=False;"\
     //         "Data Source=D:\\Machine\\Database\\MitPkg.mdb");
     strConnection = _T("Provider=Microsoft.ACE.OLEDB.12.0;Persist Security Info=False;"\
-             "Data Source=D:\\Machine\\Database\\MitMc.mdb");
+             "Data Source=D:\\Machine\\Database\\MitPkg.mdb");
 #else
     // for 32-bit process
     strConnection = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\\Machine\\Database\\MitPkg.mdb";
@@ -31,11 +33,14 @@ int _tmain(int argc, _TCHAR* argv[])
     {
         CADORecordset rs(&AdoDb);
 
+        // mitpkg.mdb
 //        if(rs.Open("SELECT * FROM [MotorSpeed] ORDER BY [Package Name]", CADORecordset::openQuery))
-        //if(rs.Open("SELECT * FROM [MotorSpeed] WHERE [Package Name] = \"Default\"", CADORecordset::openQuery))
-        if(rs.Open("SELECT Motor.*, MotorSubField.SubFieldPosName FROM MotorSubField "
-                     "RIGHT JOIN Motor ON MotorSubField.[Position Name] = Motor.[Position Name] "
-                     "ORDER BY Motor.ID, MotorSubField.ID", CADORecordset::openQuery))
+        if(rs.Open("SELECT * FROM [MotorSpeed] WHERE [Package Name] = \"Default\"", CADORecordset::openQuery))
+
+            // mitmc.mdb
+        //if(rs.Open("SELECT Motor.*, MotorSubField.SubFieldPosName FROM MotorSubField "
+        //             "RIGHT JOIN Motor ON MotorSubField.[Position Name] = Motor.[Position Name] "
+        //             "ORDER BY Motor.ID, MotorSubField.ID", CADORecordset::openQuery))
         {
             //
             CString xmlFile = "D:\\Temp\\test.xml";
@@ -144,6 +149,41 @@ int _tmain(int argc, _TCHAR* argv[])
 
     std::string utilityTestPath = CFileLocation::GetCurrentModulePath();
     CFileLocation::PathRemoveFileSpec(utilityTestPath);
+
+    // sample odbc code
+    CDatabase db;
+    //    This connect string will pop up the ODBC connect dialog
+    //CString        cConnect = "ODBC;";
+    //    This connect string will directly open & connect to the mdb
+    //      either of this will work. Can check the detail of the string via "ODBC Data Source" configuration
+    //      under [User DSN] / [Drivers]
+    // this connection string works for x64 process
+    CString        cConnect = "ODBC;DSN=MS Access Database;DBQ=d:\\machine\\database\\mitpkg.mdb";
+    //CString        cConnect = "ODBC;Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=d:\\machine\\database\\mitpkg.mdb";
+    //
+    // this connection string works for 32-bit process
+    //CString        cConnect = "ODBC;Driver={Microsoft Access Driver (*.mdb)};DBQ=d:\\machine\\database\\mitpkg.mdb";
+    db.Open( NULL,                //    DSN
+         FALSE,                //    Exclusive
+         FALSE,                //    ReadOnly
+         cConnect,            //    ODBC Connect string
+         TRUE                //    Use cursor lib
+       );
+
+    COleDateTime    dOrderDate;
+    CODBCRecordset rs(&db);
+    //BOOL bStatus = rs.Open( "SELECT * FROM [MotorSpeed] WHERE [Package Name] = \"Default\"" );
+    // ODBC query cannot work with double quote enclosing"
+    BOOL bStatus = rs.Open( "SELECT * FROM [MotorSpeed] WHERE [Package Name] = 'Default'" );
+    //BOOL bStatus = rs.Open( "SELECT * FROM [MotorSpeed]" );
+
+    while (!rs.IsEOF())
+    {
+        CString csValue = rs.Field("Motor Name");
+        TRACE("Item= %s\n", csValue);
+        rs.MoveNext();
+    }
+    rs.Close();
     return 0;
 }
 
