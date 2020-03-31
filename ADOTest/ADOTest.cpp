@@ -12,6 +12,7 @@
 #include "FileLocation.h"
 
 #include "ODBCRecordset.h"
+#include "SerialPort.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -184,6 +185,11 @@ int _tmain(int argc, _TCHAR* argv[])
         rs.MoveNext();
     }
     rs.Close();
+
+    //
+    CSerialPort sp("COM");
+    std::vector<std::string> vecPotName;
+    int cnt = sp.GetAllComPort(vecPotName);
     return 0;
 }
 

@@ -146,6 +146,7 @@
     <ClInclude Include="MotorRS.h" />
     <ClInclude Include="MtrProfileRS.h" />
     <ClInclude Include="ODBCRecordset.h" />
+    <ClInclude Include="SerialPort.h" />
     <ClInclude Include="SharedMemory.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="structure.h" />
@@ -160,6 +161,7 @@
     <ClCompile Include="MotorRS.cpp" />
     <ClCompile Include="MtrProfileRS.cpp" />
     <ClCompile Include="ODBCRecordset.cpp" />
+    <ClCompile Include="SerialPort.cpp" />
     <ClCompile Include="SharedMemory.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
