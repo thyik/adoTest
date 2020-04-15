@@ -158,12 +158,14 @@ int _tmain(int argc, _TCHAR* argv[])
     //    This connect string will directly open & connect to the mdb
     //      either of this will work. Can check the detail of the string via "ODBC Data Source" configuration
     //      under [User DSN] / [Drivers]
+#ifdef _WIN64
     // this connection string works for x64 process
     CString        cConnect = "ODBC;DSN=MS Access Database;DBQ=d:\\machine\\database\\mitpkg.mdb";
     //CString        cConnect = "ODBC;Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=d:\\machine\\database\\mitpkg.mdb";
-    //
+#else
     // this connection string works for 32-bit process
-    //CString        cConnect = "ODBC;Driver={Microsoft Access Driver (*.mdb)};DBQ=d:\\machine\\database\\mitpkg.mdb";
+    CString        cConnect = "ODBC;Driver={Microsoft Access Driver (*.mdb)};DBQ=d:\\machine\\database\\mitpkg.mdb";
+#endif
     db.Open( NULL,                //    DSN
          FALSE,                //    Exclusive
          FALSE,                //    ReadOnly
@@ -190,6 +192,30 @@ int _tmain(int argc, _TCHAR* argv[])
     CSerialPort sp("COM");
     std::vector<std::string> vecPotName;
     int cnt = sp.GetAllComPort(vecPotName);
+
+
+
+    /// test CArray vs vector
+    CArray<bool, bool> arrBool;
+    arrBool.SetSize(4000000);
+
+    std::vector<bool> vecBool(4000000);
+
+    DWORD dwStart = GetTickCount();
+    for (int i=0; i<1000000; i++)
+    {
+        bool tmp = arrBool[i];
+    }
+    TRACE("arrBool : %ld", GetTickCount() - dwStart);
+
+    TRACE("\n");
+
+    dwStart = GetTickCount();
+    for (int i=0; i<1000000; i++)
+    {
+        bool tmp = vecBool[i];
+    }
+    TRACE("vecBool : %ld", GetTickCount() - dwStart);
     return 0;
 }
 

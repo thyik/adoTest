@@ -4,7 +4,7 @@
 //
 
 #pragma once
-
+#define _AFXDLL
 #include <afxwin.h>
 #include <afxcmn.h>  // MFC support for Windows Common Controls
 #include <afxdisp.h> // MFC OLE automation classes
